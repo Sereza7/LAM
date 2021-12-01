@@ -28,8 +28,8 @@ public class CubeController : MonoBehaviour
 				float v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
 
 				
-				this.transform.Rotate(-this.transform.forward, v);
-				this.transform.Rotate(-this.transform.up, h);
+				this.transform.Rotate(-Camera.main.transform.up, v);
+				this.transform.Rotate(-Camera.main.transform.right, h);
 
 			}
 		}
