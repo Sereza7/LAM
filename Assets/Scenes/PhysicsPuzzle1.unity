@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 382ee6d4661f2a948a7b26d453ba952d, type: 2}
   m_HaloStrength: 0.5
@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65386ac5a3ddd8418fb296e1ae45e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: LinksPuzzle
+  sceneName: PhysicsPuzzle1
 --- !u!114 &98431448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,6 +1600,7 @@ GameObject:
   - component: {fileID: 6169201654592469365}
   - component: {fileID: 3791353100411337497}
   - component: {fileID: 2297483691847525979}
+  - component: {fileID: 2297483691847525981}
   - component: {fileID: 2297483691847525980}
   m_Layer: 0
   m_Name: BigSphere
@@ -1624,20 +1625,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2297483691847525980
-MeshCollider:
+--- !u!135 &2297483691847525980
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2297483691847525978}
-  m_Material: {fileID: 13400000, guid: 831b4a488a2c13a49b88555112869612, type: 2}
+  m_Material: {fileID: 13400000, guid: da93839d295b64c4b9d97020adabd3d0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8288715187396058136, guid: efaeac10c896e1c48bdd2ec2a43c0ce4, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.17
+  m_Center: {x: -0.000000048428777, y: -0.000000063329914, z: 0.000000022351728}
+--- !u!114 &2297483691847525981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297483691847525978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0aaa1b632df761498da37ea82387a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioFiles:
+  - {fileID: 8300000, guid: 8948c19f26961c8448e53df5727c2273, type: 3}
+  - {fileID: 8300000, guid: 4a931376dc0f1cd438127876e32e2545, type: 3}
+  - {fileID: 8300000, guid: f122a2eb1b4d8d7429622129f6056fa4, type: 3}
+  - {fileID: 8300000, guid: 091209e7c71f57d49be2107cbf348e9a, type: 3}
 --- !u!33 &2833336252569725910
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1750,7 +1767,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6399203102496275698}
-  m_Material: {fileID: 13400000, guid: 831b4a488a2c13a49b88555112869612, type: 2}
+  m_Material: {fileID: 13400000, guid: c50c06ee08ca0dd48992126d4ae1f58f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1826,7 +1843,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7110499219775768970}
-  m_Material: {fileID: 13400000, guid: 831b4a488a2c13a49b88555112869612, type: 2}
+  m_Material: {fileID: 13400000, guid: f22ba2865420875409ec4948ac41d6e8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4

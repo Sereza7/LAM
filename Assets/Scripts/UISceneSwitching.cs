@@ -8,6 +8,6 @@ public class UISceneSwitching : MonoBehaviour
 	public string sceneName;
 	public void switchScene()
 	{
-		SceneManager.LoadScene(sceneName);
+		SceneManager.LoadSceneAsync(sceneName);
 	}
 }
