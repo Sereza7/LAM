@@ -9,16 +9,18 @@ public class PiecePuzzleUI : MonoBehaviour
 {
     private RawImage displayimg; 
     private Button displayButton; 
+    private bool isInGame = false; 
     public GameObject solidPiece; 
     public GameObject clonePiece; 
-    public Camera cameraUI; 
+
+    [SerializeField]
+    public Vector3 positionToAppear; 
 
     void Awake() { 
         displayimg = GetComponent<RawImage>(); 
         displayButton = GetComponent<Button>(); 
         displayimg.enabled = false; 
         solidPiece.SetActive(false); 
-        clonePiece.SetActive(false); 
     }
 
     // Start is called before the first frame update
@@ -27,17 +29,9 @@ public class PiecePuzzleUI : MonoBehaviour
         displayButton.onClick.AddListener(AddPieceToGame); 
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
     public void ToBeSelected() { 
         displayimg.enabled = true; 
-        if (!solidPiece.activeSelf) {
-            clonePiece.SetActive(true); 
-        }
+        clonePiece.SetActive(true); 
     }
 
     public void NotToBeSelected() { 
@@ -45,9 +39,16 @@ public class PiecePuzzleUI : MonoBehaviour
         clonePiece.SetActive(false); 
     }
 
-    void AddPieceToGame() { 
+    public void AddPieceToGame() { 
+        // clonePiece.SetActive(!clonePiece.activeSelf); 
         solidPiece.SetActive(!solidPiece.activeSelf); 
-        clonePiece.SetActive(false); 
+        solidPiece.GetComponent<Transform>().localPosition = positionToAppear; 
+        displayimg.enabled = true; 
+        isInGame = !isInGame; 
+    }
+
+    public bool isPieceInGame() { 
+        return isInGame; 
     }
     
 }

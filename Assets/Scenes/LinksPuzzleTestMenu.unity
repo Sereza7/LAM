@@ -128,6 +128,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1260048102}
     m_Modifications:
+    - target: {fileID: 102481798756930939, guid: 3c13067a9972feb49acd877ef793dce5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093423598444038299, guid: 3c13067a9972feb49acd877ef793dce5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145198145857478395, guid: 3c13067a9972feb49acd877ef793dce5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569010232688230759, guid: 3c13067a9972feb49acd877ef793dce5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809953582135798801, guid: 3c13067a9972feb49acd877ef793dce5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788018671214992734, guid: 3c13067a9972feb49acd877ef793dce5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7285897777244774512, guid: 3c13067a9972feb49acd877ef793dce5,
         type: 3}
       propertyPath: m_RootOrder
@@ -398,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidPiece: {fileID: 94686402}
   clonePiece: {fileID: 279632281}
-  cameraUI: {fileID: 0}
+  positionToAppear: {x: 0, y: 0, z: -0.5}
 --- !u!114 &250240330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbeb302453944041b1ac87a999bf64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1234818412}
+  target: {fileID: 1260048102}
 --- !u!20 &304275445
 Camera:
   m_ObjectHideFlags: 0
@@ -663,7 +693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidPiece: {fileID: 1641612618}
   clonePiece: {fileID: 257969563}
-  cameraUI: {fileID: 0}
+  positionToAppear: {x: 0, y: -0.5, z: 0}
 --- !u!114 &435799020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,7 +1496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidPiece: {fileID: 1298642289}
   clonePiece: {fileID: 967138560}
-  cameraUI: {fileID: 0}
+  positionToAppear: {x: 0.5, y: 0, z: 0}
 --- !u!114 &1302784589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2249,7 +2279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidPiece: {fileID: 116382285}
   clonePiece: {fileID: 450440395}
-  cameraUI: {fileID: 0}
+  positionToAppear: {x: -0.5, y: 0, z: 0}
 --- !u!114 &1547645126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2679,7 +2709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidPiece: {fileID: 1637195700}
   clonePiece: {fileID: 913808862}
-  cameraUI: {fileID: 0}
+  positionToAppear: {x: 0, y: 0, z: 0.5}
 --- !u!114 &1850302013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2954,7 +2984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidPiece: {fileID: 1633381714}
   clonePiece: {fileID: 1136155995}
-  cameraUI: {fileID: 0}
+  positionToAppear: {x: 3, y: 0.5, z: 0}
 --- !u!114 &2015444359
 MonoBehaviour:
   m_ObjectHideFlags: 0
