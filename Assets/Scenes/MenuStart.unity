@@ -1701,78 +1701,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &803348047940948906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942843027342843749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3282881f07ffa40a2272273ce708aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &803348047995929894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942843027120743782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3282881f07ffa40a2272273ce708aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &803348049191402647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942843027265623963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3282881f07ffa40a2272273ce708aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &803348049529316534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942843025476696013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3282881f07ffa40a2272273ce708aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &803348049537584302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942843025928292123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3282881f07ffa40a2272273ce708aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &803348049542534736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942843026245928823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3282881f07ffa40a2272273ce708aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7942843025476696012
 Transform:
   m_ObjectHideFlags: 0
@@ -1798,7 +1726,6 @@ GameObject:
   - component: {fileID: 7942843025476696012}
   - component: {fileID: 7942843025476696014}
   - component: {fileID: 7942843025476696015}
-  - component: {fileID: 803348049529316534}
   m_Layer: 0
   m_Name: piece6
   m_TagString: Untagged
@@ -1878,7 +1805,6 @@ GameObject:
   - component: {fileID: 7942843025928292122}
   - component: {fileID: 7942843025928292124}
   - component: {fileID: 7942843025928292125}
-  - component: {fileID: 803348049537584302}
   m_Layer: 0
   m_Name: piece2
   m_TagString: Untagged
@@ -1958,7 +1884,6 @@ GameObject:
   - component: {fileID: 7942843026245928822}
   - component: {fileID: 7942843026245928824}
   - component: {fileID: 7942843026245928825}
-  - component: {fileID: 803348049542534736}
   m_Layer: 0
   m_Name: piece5
   m_TagString: Untagged
@@ -2060,7 +1985,6 @@ GameObject:
   - component: {fileID: 7942843027120743785}
   - component: {fileID: 7942843027120743787}
   - component: {fileID: 7942843027120743784}
-  - component: {fileID: 803348047995929894}
   m_Layer: 0
   m_Name: piece3
   m_TagString: Untagged
@@ -2154,7 +2078,6 @@ GameObject:
   - component: {fileID: 7942843027265623962}
   - component: {fileID: 7942843027265623964}
   - component: {fileID: 7942843027265623965}
-  - component: {fileID: 803348049191402647}
   m_Layer: 0
   m_Name: piece4
   m_TagString: Untagged
@@ -2234,7 +2157,6 @@ GameObject:
   - component: {fileID: 7942843027342843748}
   - component: {fileID: 7942843027342843750}
   - component: {fileID: 7942843027342843751}
-  - component: {fileID: 803348047940948906}
   m_Layer: 0
   m_Name: piece1
   m_TagString: Untagged
