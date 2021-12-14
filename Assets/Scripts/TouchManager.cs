@@ -32,10 +32,11 @@ public class TouchManager : MonoBehaviour
         {
             Ray mouseRay = GenerateMouseRay();
             RaycastHit hit;
-
-            if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit))
+			Debug.Log("Senta ray.");
+			if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit))
             {
                 gObj = hit.transform.gameObject;
+				Debug.Log("Hit an object.");
 
                 objPlane = new Plane(Camera.main.transform.forward*-1, gObj.transform.position);
 
