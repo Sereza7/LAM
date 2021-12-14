@@ -48,11 +48,20 @@ public class MenuPieces : MonoBehaviour
 
     void VersLaGauche() 
     { 
-        i -= 1; 
-    }
+        i -= 1;
+		if (i == 0)
+		{
+			i = NbDePieces - 1;
+		}
+
+	}
 
     void VersLaDroite() 
     { 
-        i += 1; 
-    }
+        i += 1;
+		if (i == NbDePieces)
+		{
+			i = 1;
+		}
+	}
 }

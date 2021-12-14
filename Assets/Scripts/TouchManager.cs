@@ -32,11 +32,9 @@ public class TouchManager : MonoBehaviour
         {
             Ray mouseRay = GenerateMouseRay();
             RaycastHit hit;
-			Debug.Log("Senta ray.");
 			if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit))
             {
                 gObj = hit.transform.gameObject;
-				Debug.Log("Hit an object.");
 
                 objPlane = new Plane(Camera.main.transform.forward*-1, gObj.transform.position);
 
@@ -45,10 +43,13 @@ public class TouchManager : MonoBehaviour
                 float rayDistance;
                 objPlane.Raycast(mRay, out rayDistance); //Determine where the mouse is hitting the plane
                 mO = gObj.transform.position - mRay.GetPoint(rayDistance);
-            }
+
+				
+
+			}
             else //camera rotation
             {
-                previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+                previousPosition = Input.mousePosition;
             }
         }
         //Move the Object if selected
@@ -58,7 +59,7 @@ public class TouchManager : MonoBehaviour
             float rayDistance;
             if (objPlane.Raycast(mRay, out rayDistance))
                 gObj.transform.position = mRay.GetPoint(rayDistance) + mO;
-        }
+		}
         //Release the Object if screen untouched
         else if (Input.GetMouseButtonUp(0) && gObj)
         {
@@ -66,14 +67,17 @@ public class TouchManager : MonoBehaviour
         }
         else if (Input.GetMouseButton(0) && !gObj)
         {
-            Vector3 direction = previousPosition - cam.ScreenToViewportPoint(Input.mousePosition);
+            Vector3 direction = previousPosition - Input.mousePosition;
+			foreach(Camera cam in Camera.allCameras)
+			{
+				cam.transform.position = target.position;//new Vector3();
+				cam.transform.Rotate(new Vector3(1, 0, 0), direction.y );
+				cam.transform.Rotate(new Vector3(0, 1, 0), -direction.x , Space.World);
+				cam.transform.Translate(new Vector3(0, 0, -10));
+			}
+            
 
-            cam.transform.position = target.position;//new Vector3();
-            cam.transform.Rotate(new Vector3(1,0,0), direction.y*180);
-            cam.transform.Rotate(new Vector3(0,1,0), -direction.x*180, Space.World);
-            cam.transform.Translate(new Vector3(0,0,-10));
-
-            previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+            previousPosition = Input.mousePosition;
         }
     }
 }
