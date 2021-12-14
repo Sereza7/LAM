@@ -24,10 +24,10 @@ public class CubeController : MonoBehaviour
 			}
 			if (touch.phase == TouchPhase.Moved && this.rotating)
 			{
+				//add deplacement gyroscope
 				float h = sensitivity * touch.deltaPosition.x * touch.deltaTime;
 				float v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
 
-				
 				this.transform.Rotate(Vector3.up, v);
 				this.transform.Rotate(Camera.main.transform.forward	, h);
 
