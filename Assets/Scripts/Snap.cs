@@ -5,10 +5,10 @@ using UnityEngine;
 public class Snap : MonoBehaviour
 {
     private Vector3 gridSize = new Vector3(0.5f, 0.5f, 0.5f);
-    
-    
-    private void OnDrawGizmos()
-    {
+
+
+	void Update()
+	{
         SnapToGrid();
 
     }
