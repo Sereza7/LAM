@@ -65,14 +65,15 @@ public class TouchManager : MonoBehaviour
         {
             gObj = null;
         }
+        //Move the camera around a position
         else if (Input.GetMouseButton(0) && !gObj)
         {
-            Vector3 direction = previousPosition - Input.mousePosition;
+            Vector3 direction = -(previousPosition - Input.mousePosition)/10;
 			foreach(Camera cam in Camera.allCameras)
 			{
 				cam.transform.position = target.position;//new Vector3();
-				cam.transform.Rotate(new Vector3(1, 0, 0), direction.y );
-				cam.transform.Rotate(new Vector3(0, 1, 0), -direction.x , Space.World);
+				cam.transform.Rotate(new Vector3(1, 0, 0), -direction.y );
+				cam.transform.Rotate(new Vector3(0, 1, 0), direction.x , Space.World);
 				cam.transform.Translate(new Vector3(0, 0, -10));
 			}
             
