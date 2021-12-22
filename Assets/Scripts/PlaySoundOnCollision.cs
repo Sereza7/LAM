@@ -22,12 +22,6 @@ public class PlaySoundOnCollision : MonoBehaviour
 			this.audioSource = this.gameObject.AddComponent<AudioSource>();
 		}
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.impulse.magnitude > 0.01f && !audioSource.isPlaying)

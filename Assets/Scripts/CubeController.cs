@@ -10,10 +10,17 @@ public class CubeController : MonoBehaviour
 
 	void Start()
 	{
+		if (SystemInfo.supportsGyroscope)
+		{
+			Input.gyro.enabled = true;
+			Debug.Log("Gyro Activated!");
+		}
 	}
 
 	void Update()
 	{
+		float h = 0;
+		float v = 0;
 		if (Input.touchCount > 0)
 		{
 			Touch touch = Input.GetTouch(0);
@@ -24,14 +31,19 @@ public class CubeController : MonoBehaviour
 			}
 			if (touch.phase == TouchPhase.Moved && this.rotating)
 			{
-				//add deplacement gyroscope
-				float h = sensitivity * touch.deltaPosition.x * touch.deltaTime;
-				float v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
-
-				this.transform.Rotate(Vector3.up, v);
-				this.transform.Rotate(Camera.main.transform.forward	, h);
-
+				h = sensitivity * touch.deltaPosition.x * touch.deltaTime;
+				v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
+				this.transform.Rotate(Camera.main.transform.right, v);
+				this.transform.Rotate(Camera.main.transform.up, -h, Space.World);
 			}
+		}
+		if (SystemInfo.supportsGyroscope)
+		{
+			h = sensitivity * Input.gyro.rotationRate.x ;
+			v = sensitivity * Input.gyro.rotationRate.y;
+			//Debug.Log(Input.gyro.updateInterval);
+			this.transform.Rotate(Camera.main.transform.right, -h, Space.World);
+			this.transform.Rotate(Camera.main.transform.up, -v, Space.World);
 		}
 	}
 }
