@@ -52,7 +52,7 @@ public class checkSolution : MonoBehaviour
 	}
 	private void SolutionFound()
 	{
-		Debug.Log("Solved puzzle.");
-		solutionLabel.GetComponent<TMPro.TMP_Text>().text="Congratulations!\nYou found the solution.";
+		GameObject.Find("Canvas").transform.Find("SolutionFound").gameObject.SetActive(true);
+		GameObject.Find("SolutionNotFound").SetActive(false);
 	}
 }

@@ -25,7 +25,21 @@ public class TouchManager : MonoBehaviour
         return mr;
     }
 
-    void Update()
+	private void Start()
+	{
+		//initialize audio
+		if (this.transform.GetComponent<AudioSource>())
+		{
+			this.audioSource = this.transform.GetComponent<AudioSource>();
+		}
+		else
+		{
+			this.audioSource = this.gameObject.AddComponent<AudioSource>();
+		}
+		this.audioSource.mute = OptionManager.activeSounds;
+	}
+
+	void Update()
     {
         //Select the Object to move
         if (Input.GetMouseButtonDown(0))
