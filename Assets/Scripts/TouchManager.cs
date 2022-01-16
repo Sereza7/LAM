@@ -8,13 +8,8 @@ public class TouchManager : MonoBehaviour
     Vector3 mO;
     Plane objPlane;
 
-	private AudioSource audioSource;
-	public AudioClip[] audioFiles;
-	private float minVol = 0.3f;
-	private float maxVol = 0.4f;
-
-	//Camera rotation
-	[SerializeField] private Camera cam;
+    //Camera rotation
+    [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
     private Vector3 previousPosition;
 
@@ -62,11 +57,9 @@ public class TouchManager : MonoBehaviour
                 float rayDistance;
                 objPlane.Raycast(mRay, out rayDistance); //Determine where the mouse is hitting the plane
                 mO = gObj.transform.position - mRay.GetPoint(rayDistance);
-				//play sound
-				AudioClip randomAudio = audioFiles[Random.Range(0, audioFiles.GetLength(0) - 1)];
-				audioSource.clip = randomAudio;
-				audioSource.volume = Random.Range(minVol,maxVol);
-				audioSource.Play();
+                Debug.Log("m0: " + mO);
+                
+				
 
 			}
             else //camera rotation
@@ -94,8 +87,8 @@ public class TouchManager : MonoBehaviour
 			foreach(Camera cam in Camera.allCameras)
 			{
 				cam.transform.position = target.position;//new Vector3();
-				cam.transform.Rotate(Vector3.right, -direction.y );
-				cam.transform.Rotate(Vector3.up, direction.x , Space.World);
+				cam.transform.Rotate(new Vector3(1, 0, 0), -direction.y );
+				cam.transform.Rotate(new Vector3(0, 1, 0), direction.x , Space.World);
 				cam.transform.Translate(new Vector3(0, 0, -10));
 			}
             
