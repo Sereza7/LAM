@@ -16,10 +16,12 @@ public class PlaySoundOnCollision : MonoBehaviour
         if (this.transform.GetComponent<AudioSource>())
 		{
 			this.audioSource = this.transform.GetComponent<AudioSource>();
+			this.audioSource.mute = !OptionManager.activeSounds;
 		}
 		else
 		{
 			this.audioSource = this.gameObject.AddComponent<AudioSource>();
+			this.audioSource.mute = !OptionManager.activeSounds;
 		}
     }
 	private void OnCollisionEnter(Collision collision)

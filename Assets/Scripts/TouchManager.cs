@@ -41,6 +41,7 @@ public class TouchManager : MonoBehaviour
 		{
 			this.audioSource = this.gameObject.AddComponent<AudioSource>();
 		}
+		this.audioSource.mute = OptionManager.activeSounds;
 	}
 
 	void Update()
