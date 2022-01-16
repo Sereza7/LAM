@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour
 {
-	private float sensitivity = 1f;
+	private float sensitivity = 5f;
 	private bool rotating = false;
 
 
