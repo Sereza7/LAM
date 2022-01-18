@@ -8,7 +8,8 @@ public class TouchManager : MonoBehaviour
     Vector3 mO;
     Plane objPlane;
 
-	float length;
+	private float length;
+	private Vector3 plane;
 	float speed = 10;
 	float maxSpeed = 15;
 
@@ -61,7 +62,7 @@ public class TouchManager : MonoBehaviour
 	void Update()
     {
 		//Zoom with pinch on mobile
-		if (Input.touchCount == 2)
+		if (Input.touchCount >= 2)
 		{
 			Touch touchZero = Input.GetTouch(0);
 			Touch touchOne = Input.GetTouch(1);
@@ -75,10 +76,11 @@ public class TouchManager : MonoBehaviour
 			float difference = currentMagnitude - prevMagnitude;
 
 			zoom(difference * 0.01f);
+			if(Input.GetTouch(0).phase == TouchPhase.Ended) { previousPosition = Input.GetTouch(1).position; }
+			if (Input.GetTouch(1).phase == TouchPhase.Ended) { previousPosition = Input.GetTouch(0).position; }
 		}
-
 		//Select the Object to move
-		if (Input.GetMouseButtonDown(0))
+		else if (Input.GetMouseButtonDown(0))
 		{
 			Ray mouseRay = GenerateMouseRay();
 			RaycastHit hit;
@@ -91,7 +93,12 @@ public class TouchManager : MonoBehaviour
 					gObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 					gObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
-					length = hit.distance+0.5f;//piece's width + some leeway for the "angle" between the initial pos and the destination (so making a straight line is easier)
+					length = Vector3.Distance(Camera.main.transform.position, gObj.transform.position);
+					plane = Vector3.zero;
+					Vector3 direction = Camera.main.transform.position - gObj.transform.position;
+					if (Mathf.Abs(direction.x)>=Mathf.Abs(direction.y) && Mathf.Abs(direction.x) >= Mathf.Abs(direction.z)) { plane = new Vector3(0f, 1f, 1f); }
+					else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x) && Mathf.Abs(direction.y) >= Mathf.Abs(direction.z)) { plane = new Vector3(1f, 0f, 1f); }
+					else { plane = new Vector3(1f, 1f, 0f); }
 				}
 				//objPlane = new Plane(Camera.main.transform.forward*-1, gObj.transform.position);
 				//
@@ -115,7 +122,9 @@ public class TouchManager : MonoBehaviour
 										Mathf.Round(rayCastPosition.y / this.gridSize.y) * this.gridSize.y,
 										Mathf.Round(rayCastPosition.z / this.gridSize.z) * this.gridSize.z);
 			// calc velocity necessary to follow the mouse pointer
-			var vel = (rayCastPosition - gObj.transform.position) * speed;
+			var vel = (rayCastPosition - gObj.transform.position);
+			vel.Scale(plane);
+			vel *= speed;
 			// limit max velocity to avoid pass through objects
 			if (vel.magnitude > maxSpeed) vel *= maxSpeed / vel.magnitude;
 
@@ -126,8 +135,16 @@ public class TouchManager : MonoBehaviour
 		//Release the Object if screen untouched
 		else if (Input.GetMouseButtonUp(0) && gObj)
 		{
+			var snapPos = new Vector3(
+			Mathf.Round(gObj.transform.position.x / this.gridSize.x) * this.gridSize.x,
+			Mathf.Round(gObj.transform.position.y / this.gridSize.y) * this.gridSize.y,
+			Mathf.Round(gObj.transform.position.z / this.gridSize.z) * this.gridSize.z
+			);
+
+			gObj.transform.position = snapPos;
+
 			gObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-			gObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			gObj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 			gObj = null;
 			//play sound
 			AudioClip randomAudio = audioFiles[Random.Range(0, audioFiles.GetLength(0) - 1)];
@@ -136,7 +153,7 @@ public class TouchManager : MonoBehaviour
 			audioSource.Play();
 		}
 		//Move the camera around a position
-		else if (Input.GetMouseButton(0) && !gObj)
+		else if (Input.GetMouseButton(0) && !gObj )
 		{
 			Vector3 direction = -(previousPosition - Input.mousePosition) / 10;
 			foreach (Camera cam in Camera.allCameras)

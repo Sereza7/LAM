@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour
 {
-	private float sensitivity = 5f;
+	public static float sensitivity = 1f;
+	public static bool useGyro;
 	private bool rotating = false;
 
 
@@ -33,11 +34,11 @@ public class CubeController : MonoBehaviour
 			{
 				h = sensitivity * touch.deltaPosition.x * touch.deltaTime;
 				v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
-				this.transform.Rotate(Camera.main.transform.right, v);
+				this.transform.Rotate(Camera.main.transform.right, v, Space.World);
 				this.transform.Rotate(Camera.main.transform.up, -h, Space.World);
 			}
 		}
-		if (SystemInfo.supportsGyroscope)
+		if (SystemInfo.supportsGyroscope && useGyro)
 		{
 			h = sensitivity * Input.gyro.rotationRate.x ;
 			v = sensitivity * Input.gyro.rotationRate.y;

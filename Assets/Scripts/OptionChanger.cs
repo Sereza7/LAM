@@ -32,4 +32,13 @@ public class OptionChanger : MonoBehaviour
 			Soundmanager.mute = !b;
 		}
 	}
+	public void updateActiveGyro(bool b)
+	{
+		OptionManager.updateActiveGyro(b);
+	}
+
+	public void updateSensitivity(float f)
+	{
+		OptionManager.updateSensitivity(f);
+	}
 }

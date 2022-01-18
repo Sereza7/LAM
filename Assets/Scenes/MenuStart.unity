@@ -613,6 +613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startActiveBGM: 1
   startActiveSounds: 1
+  startActiveGyro: 1
+  startSensitivity: 2
 --- !u!1 &873232746
 GameObject:
   m_ObjectHideFlags: 0

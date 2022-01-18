@@ -3,7 +3,6 @@
 Shader "Custom/FlatTransparent" {
 	Properties{
 		_Color("Main Color", Color) = (1,1,1,1)
-		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 	}
 
 		SubShader{
@@ -16,6 +15,7 @@ Shader "Custom/FlatTransparent" {
 			Pass {
 		// Only render alpha channel
 		ColorMask A
+
 		Blend SrcAlpha OneMinusSrcAlpha
 		
 
@@ -43,15 +43,13 @@ Shader "Custom/FlatTransparent" {
 		Pass {
 			// Now render color channel
 			ColorMask RGB
-			Blend SrcAlpha OneMinusSrcAlpha
-
+			Blend OneMinusDstAlpha DstAlpha
 			
 
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 
-			sampler2D _MainTex;
 			fixed4 _Color;
 
 			struct appdata {
@@ -72,8 +70,7 @@ Shader "Custom/FlatTransparent" {
 			}
 
 			fixed4 frag(v2f i) : SV_Target{
-				fixed4 col = _Color * tex2D(_MainTex, i.uv);
-				return col;
+				return _Color;
 			}
 			ENDCG
 		}
