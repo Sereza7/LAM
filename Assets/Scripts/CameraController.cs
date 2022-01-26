@@ -4,38 +4,40 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-	public Transform target;
-	private float sensitivity = 1f;
-	private bool rotating = false;
+	//Controls the camera movements on physics puzzles
 
-	int mod(int x, int m)
+	public Transform target; //The transform at which the camera will be pointing towards
+	private float sensitivity = 1f; //Sensitivity of camera controls
+	private bool rotating = false; //state of the camera
+
+	int mod(int x, int m) //Utility function
 	{
 		return (x % m + m) % m;
 	}
 
-	void Start()
-	{
-	}
 
 	void Update()
 	{
-		if (Input.touchCount > 0)
+		if (Input.touchCount > 0)//if there's at least one touch
 		{
-			Touch touch = Input.GetTouch(0);
+			Touch touch = Input.GetTouch(0);//select the first one
 			
-			if (touch.phase == TouchPhase.Began)
+			if (touch.phase == TouchPhase.Began)//if this is the start of the touch
 			{
+				//cast a ray from the camera and set the state "rotating" to True if the ray doesn't hit anything. 
 				RaycastHit hit;
 				rotating = !Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit);
 			}
-			if (touch.phase == TouchPhase.Moved && this.rotating)
+			if (touch.phase == TouchPhase.Moved && this.rotating)//if this is during the touch and the touch moved
 			{
-				float h = sensitivity * touch.deltaPosition.x * touch.deltaTime;
-				float v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
+				//then compute the movement on both axis of the screen
+				float horizontalMov = sensitivity * touch.deltaPosition.x * touch.deltaTime;
+				float verticalMov = sensitivity * touch.deltaPosition.y * touch.deltaTime;
 
+				//recalculate the position of the camera
 				this.transform.position = target.position;
-				this.transform.Rotate(Vector3.right, -v);
-				this.transform.Rotate(Vector3.up, h, Space.World);
+				this.transform.Rotate(Vector3.right, -verticalMov);
+				this.transform.Rotate(Vector3.up, horizontalMov, Space.World);
 				this.transform.Translate(new Vector3(0, 0, -10));
 			}
 		}

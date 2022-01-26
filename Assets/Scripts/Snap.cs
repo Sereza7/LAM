@@ -3,29 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Snap : MonoBehaviour
+	//Snaps objects to a 3D discrete grid
 {
-    private Vector3 gridSize = new Vector3(0.5f, 0.5f, 0.5f);
+    public Vector3 gridSize = new Vector3(0.5f, 0.5f, 0.5f); //the size of one voxel.
 
 
 	void Update()
 	{
-        SnapToGrid();
-
-    }
-
-    private void SnapToGrid()
-    {
-		if (this.GetComponent<Rigidbody>().velocity==Vector3.zero)
+		if (this.GetComponent<Rigidbody>().velocity == Vector3.zero) //Only snap when the object is moving
 		{
-			var position = new Vector3(
+			var newPosition = new Vector3(
 			   Mathf.Round(this.transform.position.x / this.gridSize.x) * this.gridSize.x,
 			   Mathf.Round(this.transform.position.y / this.gridSize.y) * this.gridSize.y,
 			   Mathf.Round(this.transform.position.z / this.gridSize.z) * this.gridSize.z
 				);
-			this.transform.position = position;
+			this.transform.position = newPosition;
 		}
-        
-
-        
-    }
+	}
 }

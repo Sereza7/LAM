@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 
 public class UIQuit : MonoBehaviour
+	//Utility class for UI, function called to quit the app.
 {
 	public async void Quit()
 	{

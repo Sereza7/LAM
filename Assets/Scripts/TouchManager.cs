@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchManager : MonoBehaviour
+	//Manages touch inputs in the wooden puzzle.
 {
-    GameObject gObj = null;
-    Vector3 mO;
-    Plane objPlane;
 
+    GameObject targetPiece = null;
+    Vector3 mO;
+
+	//movement processing
 	private float length;
 	private Vector3 plane;
 	float speed = 10;
 	float maxSpeed = 15;
 
+	//Sound effects 
 	private AudioSource audioSource;
 	public AudioClip[] audioFiles;
 	private float minVol = 0.3f;
@@ -84,37 +87,33 @@ public class TouchManager : MonoBehaviour
 		{
 			Ray mouseRay = GenerateMouseRay();
 			RaycastHit hit;
-			if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit))
+			if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit))//Initialize piece movement if hit
 			{
 
 				if (!GameObject.ReferenceEquals(target.gameObject, hit.transform.gameObject))
 				{
-					gObj = hit.transform.gameObject;
-					gObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-					gObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+					targetPiece = hit.transform.gameObject;
+					targetPiece.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+					targetPiece.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
-					length = Vector3.Distance(Camera.main.transform.position, gObj.transform.position);
+					length = Vector3.Distance(Camera.main.transform.position, targetPiece.transform.position);
+
+					//Select the movement plane according to the camera direction
 					plane = Vector3.zero;
-					Vector3 direction = Camera.main.transform.position - gObj.transform.position;
+					Vector3 direction = Camera.main.transform.position - targetPiece.transform.position;
 					if (Mathf.Abs(direction.x)>=Mathf.Abs(direction.y) && Mathf.Abs(direction.x) >= Mathf.Abs(direction.z)) { plane = new Vector3(0f, 1f, 1f); }
 					else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x) && Mathf.Abs(direction.y) >= Mathf.Abs(direction.z)) { plane = new Vector3(1f, 0f, 1f); }
 					else { plane = new Vector3(1f, 1f, 0f); }
 				}
-				//objPlane = new Plane(Camera.main.transform.forward*-1, gObj.transform.position);
-				//
-				////Calculate mouse offset to smooth the movement
-				//Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-				//float rayDistance;
-				//objPlane.Raycast(mRay, out rayDistance); //Determine where the mouse is hitting the plane
-				//mO = gObj.transform.position - mRay.GetPoint(rayDistance);
 			}
-			else //camera rotation
+			else //Camera rotation
 			{
 				previousPosition = Input.mousePosition;
 			}
 		}
+
 		//Move the Object if selected
-		else if (Input.GetMouseButton(0) && gObj)
+		else if (Input.GetMouseButton(0) && targetPiece)
 		{
 			Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			Vector3 rayCastPosition = mRay.GetPoint(length);
@@ -122,7 +121,7 @@ public class TouchManager : MonoBehaviour
 										Mathf.Round(rayCastPosition.y / this.gridSize.y) * this.gridSize.y,
 										Mathf.Round(rayCastPosition.z / this.gridSize.z) * this.gridSize.z);
 			// calc velocity necessary to follow the mouse pointer
-			var vel = (rayCastPosition - gObj.transform.position);
+			var vel = (rayCastPosition - targetPiece.transform.position);
 			vel.Scale(plane);
 			vel *= speed;
 			// limit max velocity to avoid pass through objects
@@ -130,30 +129,30 @@ public class TouchManager : MonoBehaviour
 
 			// set object velocity
 
-			gObj.GetComponent<Rigidbody>().velocity = vel;
+			targetPiece.GetComponent<Rigidbody>().velocity = vel;
 		}
 		//Release the Object if screen untouched
-		else if (Input.GetMouseButtonUp(0) && gObj)
+		else if (Input.GetMouseButtonUp(0) && targetPiece)
 		{
 			var snapPos = new Vector3(
-			Mathf.Round(gObj.transform.position.x / this.gridSize.x) * this.gridSize.x,
-			Mathf.Round(gObj.transform.position.y / this.gridSize.y) * this.gridSize.y,
-			Mathf.Round(gObj.transform.position.z / this.gridSize.z) * this.gridSize.z
+			Mathf.Round(targetPiece.transform.position.x / this.gridSize.x) * this.gridSize.x,
+			Mathf.Round(targetPiece.transform.position.y / this.gridSize.y) * this.gridSize.y,
+			Mathf.Round(targetPiece.transform.position.z / this.gridSize.z) * this.gridSize.z
 			);
 
-			gObj.transform.position = snapPos;
+			targetPiece.transform.position = snapPos;
 
-			gObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-			gObj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-			gObj = null;
-			//play sound
+			targetPiece.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+			targetPiece.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+			targetPiece = null;
+			//play sound on release of the piece
 			AudioClip randomAudio = audioFiles[Random.Range(0, audioFiles.GetLength(0) - 1)];
 			audioSource.clip = randomAudio;
 			audioSource.volume = Random.Range(minVol, maxVol);
 			audioSource.Play();
 		}
 		//Move the camera around a position
-		else if (Input.GetMouseButton(0) && !gObj )
+		else if (Input.GetMouseButton(0) && !targetPiece )
 		{
 			Vector3 direction = -(previousPosition - Input.mousePosition) / 10;
 			foreach (Camera cam in Camera.allCameras)

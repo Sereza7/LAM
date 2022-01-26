@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionManager : MonoBehaviour
+	//Singleton pattern, should be preserved through scenes.
 {
 	public bool startActiveBGM;
 	public bool startActiveSounds;
@@ -17,8 +18,8 @@ public class OptionManager : MonoBehaviour
 	public static bool activeSounds;
 	public static bool activeGyro;
 	public static float sensitivity;
+	
 
-	// Start is called before the first frame update
 	void Start()
     {
 		//Initialize static variables
@@ -27,7 +28,7 @@ public class OptionManager : MonoBehaviour
 		activeGyro = startActiveGyro;
 		sensitivity = startSensitivity;
 
-		//Add the listener to the scenemanager event
+		//Add our listener to the scenemanager event
 		SceneManager.sceneLoaded += this.changeOptionsOnLoad;
 
 	}
@@ -49,15 +50,18 @@ public class OptionManager : MonoBehaviour
 		CubeController.useGyro = OptionManager.activeGyro;
 
 		//Those lines need to be run at every scene
-		AudioSource[] sources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+		AudioSource[] sources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[]; 
 		for (int index = 0; index < sources.Length; ++index)
 		{
-			sources[index].mute = !OptionManager.activeSounds;
+			sources[index].mute = !OptionManager.activeSounds;//Mute every source if activeSounds is false
 		}
 
+		//Mute the BGM if activeSounds is false 
+		//(should be okay to run only once/none since this source is preserved through scene transitions)
 		this.gameObject.GetComponent<AudioSource>().mute = !OptionManager.activeBGM;
 	}
 
+	//Utility public static functions (setters)
 	public static void updateActiveBGM(Boolean b) { activeBGM = b; }
 	public static void updateActiveSounds(Boolean b) { activeSounds = b; }
 	public static void updateActiveGyro(Boolean b) { activeGyro = b; }

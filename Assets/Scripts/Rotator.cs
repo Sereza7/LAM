@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
+	//Utility script for displaying a 3D object by randomish smooth and variable rotations.
 {
-	//Rotational pulse
+	
 	private float speed = 50f;
 	private float pulseX;
 	private float pulseY;
@@ -19,7 +20,7 @@ public class Rotator : MonoBehaviour
 		pulseX = Random.Range(1/speed, 5/speed);
 		pulseY = Random.Range(1 / speed, 5 / speed);
 		pulseZ = Random.Range(1 / speed, 5 / speed);
-		shiftX = Random.Range(0, 6.28f);
+		shiftX = Random.Range(0, 6.28f); // 2*pi
 		shiftY = Random.Range(0, 6.28f);
 		shiftZ = Random.Range(0, 6.28f);
 	}

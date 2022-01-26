@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class androidReturn : MonoBehaviour
 {
+	//Allows for android native return button use
 	public string lastSceneName;
 	public GameObject quitPrompt;
 
@@ -14,12 +15,14 @@ public class androidReturn : MonoBehaviour
     {
 		if (Input.GetKey(KeyCode.Escape))
 		{
+			//Return back to the last scene
 			try
 			{
 				switchScene();
 			}
 			catch
 			{
+				//Start the exit from the app
 				quitPrompt.SetActive(!quitPrompt.activeSelf);
 			}
 		}

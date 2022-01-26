@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeController : MonoBehaviour
+	//Controls the cube movement in physics puzzles
 {
 	public static float sensitivity = 1f;
 	public static bool useGyro;
-	private bool rotating = false;
+	private bool rotating = false; 
 
 
 	void Start()
 	{
-		if (SystemInfo.supportsGyroscope)
+		if (SystemInfo.supportsGyroscope) //get permission for gyroscope if possible
 		{
 			Input.gyro.enabled = true;
 			Debug.Log("Gyro Activated!");
@@ -20,8 +21,10 @@ public class CubeController : MonoBehaviour
 
 	void Update()
 	{
-		float h = 0;
-		float v = 0;
+		float horizontalMov = 0;
+		float verticalMov = 0;
+
+		//Controls with touch
 		if (Input.touchCount > 0)
 		{
 			Touch touch = Input.GetTouch(0);
@@ -32,19 +35,19 @@ public class CubeController : MonoBehaviour
 			}
 			if (touch.phase == TouchPhase.Moved && this.rotating)
 			{
-				h = sensitivity * touch.deltaPosition.x * touch.deltaTime;
-				v = sensitivity * touch.deltaPosition.y * touch.deltaTime;
-				this.transform.Rotate(Camera.main.transform.right, v, Space.World);
-				this.transform.Rotate(Camera.main.transform.up, -h, Space.World);
+				horizontalMov = sensitivity * touch.deltaPosition.x * touch.deltaTime;
+				verticalMov = sensitivity * touch.deltaPosition.y * touch.deltaTime;
+				this.transform.Rotate(Camera.main.transform.right, verticalMov, Space.World);
+				this.transform.Rotate(Camera.main.transform.up, -horizontalMov, Space.World);
 			}
 		}
+		//Controls with Gyroscope
 		if (SystemInfo.supportsGyroscope && useGyro)
 		{
-			h = sensitivity * Input.gyro.rotationRate.x ;
-			v = sensitivity * Input.gyro.rotationRate.y;
-			//Debug.Log(Input.gyro.updateInterval);
-			this.transform.Rotate(Camera.main.transform.right, -h, Space.World);
-			this.transform.Rotate(Camera.main.transform.up, -v, Space.World);
+			horizontalMov = sensitivity * Input.gyro.rotationRate.x ;
+			verticalMov = sensitivity * Input.gyro.rotationRate.y;
+			this.transform.Rotate(Camera.main.transform.right, -horizontalMov, Space.World);
+			this.transform.Rotate(Camera.main.transform.up, -verticalMov, Space.World);
 		}
 	}
 }

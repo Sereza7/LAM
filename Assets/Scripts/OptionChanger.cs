@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OptionChanger : MonoBehaviour
+	//Utility script for use in the OptionMenu scene only.
+	//Works in tandem with the "OptionManager" script.
 {
 	AudioSource BGMmanager = null;
 	AudioSource Soundmanager = null;
